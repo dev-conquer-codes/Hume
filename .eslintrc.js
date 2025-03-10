@@ -7,7 +7,6 @@ module.exports = {
     'jest',
     'import',
     '@typescript-eslint',
-    'prettier',
     'react',
     'react-hooks',
     'jsx-a11y',
@@ -19,7 +18,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:jsx-a11y/strict',
     'plugin:@next/next/core-web-vitals',
-    'plugin:prettier/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -46,14 +44,12 @@ module.exports = {
       config: 'tailwind.config.ts',
       callees: ['classnames', 'cn', 'cva'],
       cssFiles: [
-        // load valid classnames from css files
         './src/**/*.css',
         '!**/node_modules',
       ],
     },
   },
   overrides: [
-    // don't use default exports unless exporting a next.js api handler or page component
     {
       files: ['./src/**/*.ts', './src/**/*.tsx'],
       excludedFiles: [
@@ -65,7 +61,6 @@ module.exports = {
         'import/no-default-export': 'error',
       },
     },
-    // don't import "boring-avatars" from outside of the /components/core/Avatar folder
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
       excludedFiles: ['src/components/core/Avatar/*'],
@@ -78,7 +73,6 @@ module.exports = {
         ],
       },
     },
-    // don't import "@radix-ui/react-alert-dialog" outside of the /components/core/AlertDialog folder
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
       excludedFiles: ['src/components/core/AlertDialog/*'],
@@ -91,7 +85,6 @@ module.exports = {
         ],
       },
     },
-    // don't import "react-query" from outside of the /api folder
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
       excludedFiles: ['src/api/**/*'],
@@ -170,8 +163,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'no-debugger': 'error',
     'no-nested-ternary': 'error',
-    'prettier/prettier': 'error',
-    eqeqeq: 'error',
+    'eqeqeq': 'error',
     'jest/no-focused-tests': 'error',
     'react/jsx-key': [
       'error',
@@ -202,12 +194,10 @@ module.exports = {
           caseInsensitive: true,
         },
         groups: [
-          //
           ['external', 'builtin'],
           ['internal'],
           ['index', 'sibling', 'parent'],
         ],
-        // keep "$/" imports within the "external" group
         pathGroups: [
           { group: 'external', pattern: '$/**' },
           { group: 'external', pattern: '$storybook/**' },
@@ -236,7 +226,6 @@ module.exports = {
       'warn',
       /(types|styles|logic|connect)\.ts(x)?$/,
     ],
-    // cspell:ignore classname
     'tailwindcss/no-custom-classname': 'error',
   },
 };
