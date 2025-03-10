@@ -55,42 +55,7 @@ export const ExampleComponent = () => {
     }
   }, [isPaused, resumeAssistant, pauseAssistant]);
   const pausedText = isPaused ? 'Resume' : 'Pause';
-  const requestMicrophonePermission = async () => {
-    if (typeof navigator !== 'undefined' && navigator.mediaDevices?.getUserMedia) {
-      try {
-        // Request microphone access in the browser
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (stream) {
-          console.log('Microphone access granted');
-          return true;
-        }
-      } catch (error) {
-        console.error('Microphone permission denied:', error);
-        alert('Please enable microphone access in your browser settings.');
-        return false;
-      }
-    } else {
-      console.error('Microphone API not supported in this environment.');
-      alert('Microphone access is not supported on this device.');
-      return false;
-    }
-  };
-  
-  const connectFunc = async () => {
-    const hasPermission = await requestMicrophonePermission();
-    if (hasPermission) {
-      try {
-        // Add your voice connection logic here
-        await connect();
-        console.log('Connecting to voice service...');
-        // Example: await voiceService.connect();
-      } catch (error) {
-        console.error('Failed to connect:', error);
-        alert('Failed to connect to voice service.');
-      }
-    }
-  };
-  
+
   const callDuration = (
     <div>
       <div className={'text-sm font-medium uppercase'}>Call duration</div>
@@ -285,7 +250,9 @@ export const ExampleComponent = () => {
 
                 <button
                   className="rounded border border-neutral-500 p-2"
-                  onClick={connectFunc}
+                  onClick={() => {
+                    void connect();
+                  }}
                 >
                   Connect to voice
                 </button>
